@@ -1,0 +1,45 @@
+runtime: go
+api_version: go1
+automatic_scaling:
+  max_idle_instances: 1  # default value
+  min_pending_latency: automatic  # default value
+  max_pending_latency: 5000ms
+
+#default_expiration: "1d"
+
+
+env_variables:
+  MY_ENV: 'DEV'
+
+handlers:
+
+# index html
+- url: /
+  static_files: static/index.html
+  upload: static/(.*)
+  secure: always
+  http_headers:
+    X-UA-Compatible: "IE=edge"
+
+# CSS, Javascript, CSS and images
+- url: /(.*\.(gif|png|jpg|css|html|js))$
+  static_files: static/\1
+  upload: static/.*\.(gif|png|jpg|css|html|js)$
+  secure: always
+
+# Html files
+- url: /(.*\.(html|htm))$
+  static_files: static/\1
+  upload: static/.*\.(html|htm)$
+  secure: always
+  http_headers:
+    X-UA-Compatible: "IE=edge"
+
+- url: /
+  static_files: static/\1
+  upload: static/(.*)
+  secure: always
+
+- url: /.*
+  script: _go_app
+  secure: always
