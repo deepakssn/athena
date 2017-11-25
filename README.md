@@ -6,5 +6,8 @@ I plan to use fastest way to build services and deploy a working solution that c
 
 1. Use google cloud (Free)
 2. Backend Services : GO
-3. FE: Angular
+3. FE: Angular 1.6
 4. DB - Datastore
+
+
+https://athena-deepak.appspot.com/report

@@ -24,7 +24,7 @@ type User struct {
 // GameDetail will hold each news data
 type GameDetail struct {
 	ID         int64     `json:"id" datastore:"-" db:"-"`
-	USERID     int       `json:"userId"`
+	USERNAME   string    `json:"username"`
 	GAME       string    `json:"game"`
 	DIFFICULTY string    `json:"difficulty"`
 	STARTTIME  time.Time `json:"startTime,omitempty"`
@@ -35,6 +35,5 @@ type GameDetail struct {
 var defaultPageSize = 30
 
 func init() {
-	http.HandleFunc("/", generateReport)
 	http.HandleFunc("/report", generateReport)
 }
