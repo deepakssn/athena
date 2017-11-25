@@ -4,16 +4,19 @@ body {
 table {
   margin-top: 15px;
 }
+td {
+  font-weight: 300;
+  font-size: 14px;
+}
 // td {
 //   padding: 10px;
 // }
-// tr:nth-child(2n) {
-//   background: #f9f9f9;
-// }
-// tr:nth-child(2n+1) {
-//   background: #ffffff;
-// }
+tr:nth-child(2n) {
+  background: #fcfcfc;
+}
+tr:nth-child(2n+1) {
+  background: #f9f9f9;
+}
 .wrapper {
-  margin: 10px;
   margin-top: 30px;
 }

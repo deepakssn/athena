@@ -35,20 +35,13 @@
             <th ng-repeat="field in availableFields">{{field}}</th>
           </thead>
           <tr ng-repeat="data in response | orderBy : sortField | filter: searchKeyword ">
-            <td>
-              {{ data.id }}</td>
-            <td>
-              {{ data.username }}</td>
-            <td>
-              {{ data.game }}</td>
-            <td>
-              {{ data.difficulty }}</td>
-            <td>
-              {{ data.startTime }}</td>
-            <td>
-              {{ data.endTime }}</td>
-            <td>
-              {{ data.score }}</td>
+            <td>{{ data.id }}</td>
+            <td>{{ data.username }}</td>
+            <td>{{ data.game }}</td>
+            <td>{{ data.difficulty }}</td>
+            <td>{{ data.startTime }}</td>
+            <td>{{ data.endTime }}</td>
+            <td>{{ data.score }}</td>
           </tr>
         </table>
       </div>

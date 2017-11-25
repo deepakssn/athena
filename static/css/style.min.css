@@ -1,1 +1,1 @@
-body{font-family:'Lato', sans-serif}table{margin-top:15px}.wrapper{margin:10px;margin-top:30px}
+body{font-family:'Lato', sans-serif}table{margin-top:15px}td{font-weight:300;font-size:14px}tr:nth-child(2n){background:#fcfcfc}tr:nth-child(2n+1){background:#f9f9f9}.wrapper{margin-top:30px}
