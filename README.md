@@ -10,4 +10,4 @@ I plan to use fastest way to build services and deploy a working solution that c
 4. DB - Datastore
 
 
-https://athena-deepak.appspot.com/report
+https://athena-deepak.appspot.com/

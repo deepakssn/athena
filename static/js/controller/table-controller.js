@@ -8,7 +8,6 @@ angular.module('app', [])
     $http.get("/report")
       .then(function(response) {
         $scope.response = response.data.gameDetails;
-        console.log($scope.response);
         var keys = [];
         for (var i = 0; i < $scope.response.length; i++) {
           Object.keys($scope.response[i]).forEach(function(key) {
