@@ -12,15 +12,6 @@ type Response struct {
 	GAMEDETAILS []GameDetail `json:"gameDetails,omitempty"`
 }
 
-// User will hold user details
-type User struct {
-	ID       int64    `json:"id,omitempty" datastore:"-" db:"-"`
-	EMAIL    string   `json:"email"`
-	PASSWORD string   `json:"password"`
-	ACTIVE   int      `json:"active"`
-	ROLES    []string `json:"roles"`
-}
-
 // GameDetail will hold each news data
 type GameDetail struct {
 	ID         int64     `json:"id" datastore:"-" db:"-"`
@@ -35,7 +26,9 @@ type GameDetail struct {
 var defaultPageSize = 30
 
 func init() {
+	// Get Game Details for Report
 	http.HandleFunc("/report", generateReport)
+	// Load Data
 	http.HandleFunc("/load", loadData)
 
 }

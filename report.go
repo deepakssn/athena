@@ -21,7 +21,7 @@ import (
 func generateReport(w http.ResponseWriter, r *http.Request) {
 	var tmpResponse Response
 	switch r.Method {
-	case "GET": // Get the news items
+	case "GET":
 		ctx := appengine.NewContext(r)
 		log.Infof(ctx, "GET API CALLED")
 
@@ -35,8 +35,6 @@ func generateReport(w http.ResponseWriter, r *http.Request) {
 
 		log.Infof(ctx, "PageSize: %v", pageSize)
 
-		// POSTDATE is a date time field in DB (datastore)
-		// Get Recent items by default
 		q := datastore.NewQuery("GAMES").
 			Limit(pageSize)
 
@@ -51,9 +49,9 @@ func generateReport(w http.ResponseWriter, r *http.Request) {
 			gameDetails[i].ID = keys[i].IntID()
 		}
 		tmpResponse.GAMEDETAILS = gameDetails
-		tmpResponse.successMsg(ctx, "Fetched news from DB", w, r)
+		tmpResponse.successMsg(ctx, "Fetched Game Details from DB", w, r)
 		return
-	case "POST": // Add a news using JSON - Temporary
+	case "POST":
 		ctx := appengine.NewContext(r)
 		log.Infof(ctx, "POST API CALLED %v", "")
 
@@ -79,7 +77,7 @@ func generateReport(w http.ResponseWriter, r *http.Request) {
 		var gameDetails []GameDetail
 		gameDetails = append(gameDetails, form)
 		tmpResponse.GAMEDETAILS = gameDetails
-		tmpResponse.successMsg(ctx, "News Item added to DB", w, r)
+		tmpResponse.successMsg(ctx, "Game Details added to DB", w, r)
 		return
 	default:
 		ctx := appengine.NewContext(r)
@@ -106,7 +104,7 @@ func loadData(w http.ResponseWriter, r *http.Request) {
 			form.DIFFICULTY = "MEDIUM"
 		case 2:
 			form.DIFFICULTY = "HARD"
-		default:
+		default: // Never goes here
 			form.DIFFICULTY = "TOUGH"
 		}
 		form.USERNAME = "TST" + ranstr
@@ -121,15 +119,15 @@ func loadData(w http.ResponseWriter, r *http.Request) {
 			tmpResponse.errMsg(ctx, err, "Unable to add to DB", w, r)
 			return
 		}
-		//log.Infof(ctx, "DB response: %v", dbresp.IntID())
 		form.ID = dbresp.IntID()
 		var gameDetails []GameDetail
 		gameDetails = append(gameDetails, form)
 		tmpResponse.GAMEDETAILS = gameDetails
-		// tmpResponse.successMsg(ctx, "News Item added to DB", w, r)
 	}
 	log.Infof(ctx, "INSERT COMPLETE")
 }
+
+// Response struct method to send error message
 func (tmpResponse *Response) errMsg(ctx context.Context, err error, msg string, w http.ResponseWriter, r *http.Request) {
 	tmpResponse.SUCCESS = false
 	tmpResponse.MESSAGE = msg
@@ -140,6 +138,7 @@ func (tmpResponse *Response) errMsg(ctx context.Context, err error, msg string, 
 	return
 }
 
+// Response struct method to send Success message
 func (tmpResponse *Response) successMsg(ctx context.Context, msg string, w http.ResponseWriter, r *http.Request) {
 	tmpResponse.SUCCESS = true
 	tmpResponse.MESSAGE = msg
@@ -151,6 +150,6 @@ func (tmpResponse *Response) successMsg(ctx context.Context, msg string, w http.
 
 //GenerateRandom to generate a random number between min and max
 func random(min, max int) int {
-	rand.Seed(time.Now().UnixNano() / int64(time.Millisecond))
+	rand.Seed(time.Now().UnixNano() / int64(time.Nanosecond))
 	return rand.Intn(max-min) + min
 }
