@@ -36,4 +36,6 @@ var defaultPageSize = 30
 
 func init() {
 	http.HandleFunc("/report", generateReport)
+	http.HandleFunc("/load", loadData)
+
 }
